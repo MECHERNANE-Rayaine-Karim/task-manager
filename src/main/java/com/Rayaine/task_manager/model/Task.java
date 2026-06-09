@@ -19,14 +19,14 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @Column(nullable = false)
+    @Column(nullable = false )
     private String taskTitle;
     private String taskDescription;
     @Enumerated(EnumType.STRING)
     private Status currentStatus;
     @Column(updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
-    private LocalDateTime finishedAT;
+    private LocalDateTime finishedAt;
 
     public Long getId() {
         return id;
@@ -52,8 +52,8 @@ public class Task {
         return createdAt;
     }
 
-    public LocalDateTime getFinishedAT() {
-        return finishedAT;
+    public LocalDateTime getFinishedAt() {
+        return finishedAt;
     }
 
     public void setUser(User user) {
@@ -76,7 +76,7 @@ public class Task {
         this.createdAt = createdAt;
     }
 
-    public void setFinishedAT(LocalDateTime finishedAT) {
-        this.finishedAT = finishedAT;
+    public void setFinishedAt(LocalDateTime finishedAt) {
+        this.finishedAt = finishedAt;
     }
 }
