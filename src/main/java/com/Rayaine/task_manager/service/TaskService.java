@@ -22,7 +22,8 @@ public class TaskService {
     }
 
 
-    public void createTask( String username, String taskTitle , String taskDescription , Task.Status currentStatus){
+
+    public Long createTask( String username, String taskTitle , String taskDescription , Task.Status currentStatus){
         Task task = new Task();
         task.setUser(userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("User not found " + username)
         ));
@@ -33,8 +34,12 @@ public class TaskService {
         if(currentStatus.equals(Task.Status.DONE)){
             task.setFinishedAt(LocalDateTime.now());
         }
-        taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
+        return savedTask.getId();
     }
+
+
+
     
     public List<Task> getUserTasks(String username){
         return taskRepository.findByUser(userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("User not found " + username)
