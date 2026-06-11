@@ -1,6 +1,7 @@
 package com.Rayaine.task_manager.controller;
 
 
+import com.Rayaine.task_manager.dto.TaskDTO;
 import com.Rayaine.task_manager.model.Task;
 import com.Rayaine.task_manager.service.TaskService;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class TaskController {
 
     @GetMapping("/api/tasks")
     public ResponseEntity<?> getUserTasks() {
-        List<Task> tasks = taskService.getUserTasks(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<TaskDTO> tasks = taskService.getUserTasks(SecurityContextHolder.getContext().getAuthentication().getName());
 
         return ResponseEntity.ok(tasks);
     }

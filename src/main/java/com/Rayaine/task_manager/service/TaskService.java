@@ -1,5 +1,6 @@
 package com.Rayaine.task_manager.service;
 
+import com.Rayaine.task_manager.dto.TaskDTO;
 import com.Rayaine.task_manager.model.Task;
 import com.Rayaine.task_manager.model.User;
 import com.Rayaine.task_manager.repository.TaskRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -41,9 +43,9 @@ public class TaskService {
 
 
     
-    public List<Task> getUserTasks(String username){
+    public List<TaskDTO> getUserTasks(String username){
         return taskRepository.findByUser(userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("User not found " + username)
-        ));
+        )).stream().map(TaskDTO::new).collect(Collectors.toList());
     }
 
     public void updateTask( String username , Long taskId , Task.Status currentStatus) {
